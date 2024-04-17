@@ -9,18 +9,11 @@
             background-color: black;
         }
 
-        body:hover {
-            background-image: url(/transformation_js/photos/space.jpeg);
-            background-repeat:no-repeat;
-            background-size: 100% 100%;
-        }
         .back {
             margin-right: 15px;
         }
 
-
         .row {
-            display: -ms-flexbox;
             display: flex;
             justify-content: space-between;
             padding: .5% 10%;
@@ -31,82 +24,105 @@
             height: 500px;
             vertical-align: middle;
             cursor: pointer;
-
         }
+
         h1 {
             text-align: center;
             font-size: 55px;
-            color:white;
+            color: white;
             font-weight: 100;
         }
-        @media (min-width:768px) {
-            .row img {
-                width: 50%;
-            }
-        }
-        @media (min-width: 992px) {
-            .row img {
-                width: 100%;
-            }
-        }
-
-
+        .reset-button {
+            position: absolute;
+            justify-content: center;
+            top: 5%;
+            right: 13%;
+            font-size: 30px;
+         }
     </style>
     <script>
         function one(element) {
-            var imagePath = '/transformation_js/photos/circle.JPG';
-            element.src = imagePath;
+            element.src = '/transformation_js/photos/circle.JPG';
             element.alt = "Circle";
             element.style.width ="300px";
-            element.style.height = "500px";  
+            element.style.height = "500px";
+            playSound();  
         }
+
         function two(element) {
-            var imagePath = '/transformation_js/photos/diamond.JPG';
-            element.src = imagePath;
+            element.src = '/transformation_js/photos/diamond.JPG';
             element.alt = "Diamond";
             element.style.width ="300px";
-            element.style.height = "500px";   
+            element.style.height = "500px";
+            playSound();   
         }
+
         function three(element) {
-            var imagePath = '/transformation_js/photos/moon.JPG';
-            element.src = imagePath;
+            element.src = '/transformation_js/photos/moon.JPG';
             element.alt = "Moon";
             element.style.width ="300px";
-            element.style.height = "500px";  
+            element.style.height = "500px";
+            playSound();  
         }
+
         function four(element) {
-            var imagePath = '/transformation_js/photos/square.JPG';
-            element.src = imagePath;
+            element.src = '/transformation_js/photos/square.JPG';
             element.alt = "Square";
             element.style.width ="300px";
-            element.style.height = "500px";   
+            element.style.height = "500px";
+            playSound();   
         }
+
         function five(element) {
-            var imagePath = '/transformation_js/photos/triangle.JPG';
-            element.src = imagePath;
+            element.src = '/transformation_js/photos/triangle.JPG';
             element.alt = "Triangle";
             element.style.width ="300px";
-            element.style.height = "500px";      
+            element.style.height = "500px";
+            playSound();      
+        }
+
+        function changeBackground() {
+            document.body.style.backgroundImage = 'url(/transformation_js/photos/space.jpeg)';
+            document.body.style.backgroundSize = 'cover';
+        }
+
+        function revertBackground() {
+            document.body.style.backgroundImage = '';
+            document.body.style.backgroundColor = 'black';
+        }
+        function playSound() {
+            var sound = document.getElementById("flipSound");
+            sound.play();
+            playSound();
+        }
+        function resetCards() {
+            var cards = document.querySelectorAll('.row img');
+            cards.forEach(function(card) {
+                card.src = '/transformation_js/photos/backside.JPG';
+                card.alt = 'Back';
+            });
         }
     </script>
 </head>
 <body>
     <header><h1>Find the Pairs</h1></header>
+    <button class="reset-button" onclick="resetCards()">Reset Cards</button>
     <nav></nav>
     <main>
+        <audio id="flipSound" src="/transformation_js/audio/cardflip.mp3"></audio>
         <div class="row">
-            <div class="back"><img src="/transformation_js/photos/backside.JPG" alt="Back" onclick="one(this)"></div>
-            <div class="back"><img src="/transformation_js/photos/backside.JPG" alt="Back" onclick="two(this)"></div>
-            <div class="back"><img src="/transformation_js/photos/backside.JPG" alt="Back" onclick="three(this)"></div>
-            <div class="back"><img src="/transformation_js/photos/backside.JPG" alt="Back" onclick="four(this)"></div>
-            <div class="back"><img src="/transformation_js/photos/backside.JPG" alt="Back" onclick="five(this)"></div>
+            <div class="back" onmousemove="changeBackground()" onmouseout="revertBackground()"><img src="/transformation_js/photos/backside.JPG" alt="Back" onclick="one(this)"></div>
+            <div class="back" onmousemove="changeBackground()" onmouseout="revertBackground()"><img src="/transformation_js/photos/backside.JPG" alt="Back" onclick="two(this)"></div>
+            <div class="back" onmousemove="changeBackground()" onmouseout="revertBackground()"><img src="/transformation_js/photos/backside.JPG" alt="Back" onclick="three(this)"></div>
+            <div class="back" onmousemove="changeBackground()" onmouseout="revertBackground()"><img src="/transformation_js/photos/backside.JPG" alt="Back" onclick="four(this)"></div>
+            <div class="back" onmousemove="changeBackground()" onmouseout="revertBackground()"><img src="/transformation_js/photos/backside.JPG" alt="Back" onclick="five(this)"></div>
         </div>
         <div class="row">
-            <div class="back"><img src="/transformation_js/photos/backside.JPG" alt="Back" onclick="four(this)"></div>
-            <div class="back"><img src="/transformation_js/photos/backside.JPG" alt="Back" onclick="three(this)"></div>
-            <div class="back"><img src="/transformation_js/photos/backside.JPG" alt="Back" onclick="five(this)"></div>
-            <div class="back"><img src="/transformation_js/photos/backside.JPG" alt="Back" onclick="one(this)"></div>
-            <div class="back"><img src="/transformation_js/photos/backside.JPG" alt="Back" onclick="two(this)"></div>
+            <div class="back" onmousemove="changeBackground()" onmouseout="revertBackground()"><img src="/transformation_js/photos/backside.JPG" alt="Back" onclick="four(this)"></div>
+            <div class="back" onmousemove="changeBackground()" onmouseout="revertBackground()"><img src="/transformation_js/photos/backside.JPG" alt="Back" onclick="three(this)"></div>
+            <div class="back" onmousemove="changeBackground()" onmouseout="revertBackground()"><img src="/transformation_js/photos/backside.JPG" alt="Back" onclick="five(this)"></div>
+            <div class="back" onmousemove="changeBackground()" onmouseout="revertBackground()"><img src="/transformation_js/photos/backside.JPG" alt="Back" onclick="one(this)"></div>
+            <div class="back" onmousemove="changeBackground()" onmouseout="revertBackground()"><img src="/transformation_js/photos/backside.JPG" alt="Back" onclick="two(this)"></div>
         </div>
     </main>
     <footer></footer>
