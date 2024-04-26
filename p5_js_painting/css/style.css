@@ -56,7 +56,13 @@ nav a:last-child {
   margin-right: 0;
 }
 
-#myCanvas,
+#myCanvas {
+  display: block;
+  margin: auto;
+  padding: 10px;
+  transform: scale(0.67)
+}
+
 img {
   display: block;
   margin: auto;
