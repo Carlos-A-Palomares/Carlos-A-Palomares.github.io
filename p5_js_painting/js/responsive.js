@@ -17,7 +17,7 @@ function preload() {
   yellow = loadImage("photos/yellow_oil.JPG");
   white = loadImage("photos/white_oil.JPG");
   grey = loadImage("photos/grey_oil.JPG");
-  dark_grey = loadImage("/photos/dark_grey_oil.JPG");
+  dark_grey = loadImage("photos/dark_grey_oil.JPG");
 
   // frame color/texture variable pointing to img source
   white_frame = loadImage("photos/white_frame.JPG");
