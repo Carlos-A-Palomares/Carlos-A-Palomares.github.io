@@ -51,8 +51,9 @@ function draw() {
   
   translate(-400, -400);
   
-  texture(white_frame)
+ 
   beginShape()
+  texture(white_frame)
   vertex(80, 80)
   vertex(80, 728)
   vertex(720, 728)
@@ -60,8 +61,9 @@ function draw() {
   vertex(80, 80)
   endShape()
 
-  texture(white_frame)
+
   beginShape()
+  texture(white_frame)
   vertex(100, 100)
   vertex(100, 700)
   vertex(700, 700)
@@ -81,8 +83,9 @@ function draw() {
   triangle(100, 700, 222, 587.5, 341.5, 700.);
 
   // top white triangle
-  texture(white)
+  
   beginShape();
+  texture(white)
   vertex(337.50, 100);
   vertex(700, 100);
   vertex(410, 100);
@@ -91,8 +94,9 @@ function draw() {
   endShape();
 
   // red triangle
-  texture(red)
+  
   beginShape();
+  texture(red)
   vertex(337.50, 474.7);
   vertex(700, 100);
   vertex(700, 700);
@@ -101,8 +105,9 @@ function draw() {
 
 
   // black triangle
-  texture(black)
+  
   beginShape();
+  texture(black)
   vertex(100, 325);
   vertex(311.081, 100);
   vertex(337.5, 100);
