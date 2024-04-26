@@ -12,15 +12,15 @@ let time = 0;
 
 function preload() {
   // triangle color/texture variables pointing to img source
-  red = loadImage("/photos/red_oil.JPG");
-  black = loadImage("/photos/black_oil.JPG");
-  yellow = loadImage("/photos/yellow_oil.JPG");
-  white = loadImage("/photos/white_oil.JPG");
-  grey = loadImage("/photos/grey_oil.JPG");
+  red = loadImage("photos/red_oil.JPG");
+  black = loadImage("photos/black_oil.JPG");
+  yellow = loadImage("photos/yellow_oil.JPG");
+  white = loadImage("photos/white_oil.JPG");
+  grey = loadImage("photos/grey_oil.JPG");
   dark_grey = loadImage("/photos/dark_grey_oil.JPG");
 
   // frame color/texture variable pointing to img source
-  white_frame = loadImage("/photos/white_frame.JPG");
+  white_frame = loadImage("photos/white_frame.JPG");
 }
 
 function setup() {
