@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Image Viewer - Round Two</title>
+    <style>
+        .fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1050;
+            align-items: center;
+            justify-content: center;
+        }
+        .fullscreen img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Rings of Time: The Stone Quest!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/game_menu.html">Game Menu</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5 d-flex flex-column align-items-center">
+        <h2>Round 2</h2>
+        <img id="imageDisplay" src="images/test/1.jpg" class="img-fluid" alt="Display Image">
+        <button id="nextButton" class="btn btn-primary mt-3">Next</button>
+    </div>
+    <div class="fullscreen" id="fullscreenDiv" onclick="toggleFullscreen()">
+        <img src="" id="fullscreenImg">
+    </div>
+    <script>
+        const images = ["images/test/1.JPG", "images/test/2.jpg", "images/test/3.jpg"]; // Update the images as needed
+        let currentImageIndex = 0;
+
+        document.getElementById('nextButton').addEventListener('click', function() {
+            if (confirm('Are you sure you want to see the next image?')) {
+                if (currentImageIndex === images.length - 1) {
+                    window.location.href = 'round_three.html'; // Navigate to round three
+                } else {
+                    currentImageIndex = (currentImageIndex + 1) % images.length;
+                    document.getElementById('imageDisplay').src = images[currentImageIndex];
+                }
+            }
+        });
+
+        document.getElementById('imageDisplay').addEventListener('click', function() {
+            const fullscreenDiv = document.getElementById('fullscreenDiv');
+            const fullscreenImg = document.getElementById('fullscreenImg');
+            fullscreenImg.src = this.src;
+            fullscreenDiv.style.display = 'flex';
+        });
+
+        function toggleFullscreen() {
+            const fullscreenDiv = document.getElementById('fullscreenDiv');
+            if (fullscreenDiv.style.display === 'flex') {
+                fullscreenDiv.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
