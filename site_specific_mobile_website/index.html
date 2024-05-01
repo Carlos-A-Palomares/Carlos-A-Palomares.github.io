@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Stone Enclosure: Rock Rings: Home</title>
+    <style>
+        body {
+            background-image: url('images/welcome_bg.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            color: white;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 50px;
+        }
+
+        .navbar-fixed-top {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .menu-container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            width: 75%;
+            text-align: left;
+            position: fixed;
+            z-index: 2;
+        }
+
+        .content-container {
+            background-image: url('images/bg.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100% auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            overflow-y: auto;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s, visibility 0.5s;
+            z-index: 1;
+        }
+
+        .enter-button {
+            padding: 10px 20px;
+            font-size: 25px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .enter-button:hover {
+            background-color: #0056b3;
+        }
+        .background-content {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+            text-align: left;
+
+            z-index: 2;
+
+
+        }
+        
+        .background-content p {
+            color: white;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top ">
+        <a class="navbar-brand" href="index.html">Stone Enclosure: Rock Rings </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="menu-container">
+        <center>
+            <h1>Welcome!</h1>
+        </center>
+        <br>
+        <p><strong>This website hosts an interactive scavenger hunt and escape room type game that is centered around
+                the intriguing Stone Enclosure: Rock Rings sculpture created by Nancy Holt.</strong></p>
+        <p><strong>Before you enter, please consider the following:</strong></p>
+        <p><strong>Explore and Enjoy:</strong> Beyond learning about the Stone Enclosure: Rock Rings, the game is
+            intended to immerse you in a realm of fantasy and imagination, encouraging fun social interaction, and
+            presence in the moment.</p>
+        <p><strong>Relax and Listen:</strong> Should you opt to listen to the game's audio, take the moment to relax and
+            engage fully with the narrative.</p>
+        <p><strong>Recommended:</strong> Listen to the story first behind the creation of the Stone Enclosure: Rock
+            Rings is suggested to better understand the game’s storyline. Go to the navigation bar and
+            press the "About" link. Feel free to explore around the sculpture as you
+            listen, or dive right into the game if you prefer.</p><br>
+        <div class="text-center">
+            <button class="enter-button" onclick="toggleContent()">Enter</button>
+        </div>
+    </div>
+
+    <div class="content-container" id="gameContent">
+        <div class="background-content">
+        <div class="row">
+        </div>
+        <div class="row">
+            <div class="col-md-6 mt-5 mx-auto">
+                <div class="outer-container content">
+                    <div class="col-12 mt-5 text-center">
+                        <h1>Rings of Time: The Stone Quest!</h1><br><br>
+                    </div>
+                    <section id="how-to-play">
+                        <h2>How to Play:</h2>
+                        <p>Welcome to Rings of Time: The Stone Quest! Dive into an interactive team-based adventure
+                            within the
+                            mystical Stone Enclosure: Rock Rings, influenced by celestial events and history.</p>
+                    </section>
+                    <br>
+
+                    <section id="objective">
+                        <h3>Objective:</h3>
+                        <p>As a team, locate five unique stones within the inner circle of the Stone Enclosure to unlock
+                            their
+                            magical powers and become the guardians of the Stone Rings.</p>
+                    </section>
+                    <br>
+
+                    <section id="game-setup-and-play">
+                        <h3>Game Setup and Play:</h3>
+                        <p><strong>1. Choose a Moderator:</strong> Before starting, select one team member to act as the
+                            moderator. This person will access the Moderator Panel, which displays the correct locations
+                            of each stone, allowing them to confirm or deny the players' findings.</p>
+                        <p><strong>2. Gather at the Starting Point:</strong> All players must assemble inside the inner
+                            circle of the Stone Enclosure to begin the quest.</p>
+                        <p><strong>3. Access Game Panels and Engage with the Introductory Story:</strong></p>
+                        <ul>
+                            <li><strong>Moderator:</strong> Click the “Start” button to access the
+                                introductory story. After viewing or skipping the story by pressing "Proceed," you will
+                                see the map showing the locations of the stones, allowing you to confirm or deny the
+                                players' findings.</li><br>
+                            <li><strong>Players:</strong> Click the “Start” button to engage with the
+                                introductory story. After viewing or skipping the story by pressing "Proceed," you will
+                                you will be given details
+                                on the first stone to search for.</li>
+                        </ul>
+
+                        <p><strong>4. Begin the Search:</strong> Players start searching for the first stone. Once a
+                            stone is believed to be found, inform the moderator for verification.</p>
+
+                        <p><strong>5. Verification by Moderator:</strong> The moderator confirms whether the identified
+                            stone is correct. Upon confirmation, the moderator informs the players, who then press
+                            "Next" to proceed to the next stone.</p>
+
+                        <p><strong>6. Complete the Quest:</strong> Continue the search and verification process until
+                            all stones are found. Successfully locating all stones concludes the game, and players are
+                            celebrated as the new guardians of the Stone Rings.</p>
+                    </section>
+                    </section>
+                    <br><br>
+                    <div class="row">
+
+                        <div class="col-sm-6 text-center custom-space">
+                            <h1>Player</h1>
+                            <a href="intro_player.html" class="btn btn-secondary mt-1 mb-5">Start</a>
+                        </div>
+
+
+                        <div class="col-sm-5 text-center custom-space">
+                            <h1>Moderator</h1>
+                            <a href="intro_mod.html" class="btn btn-secondary mt-1 mb-5">Start</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleContent() {
+            var content = document.getElementById("gameContent");
+            var menuContainer = document.querySelector(".menu-container");
+            content.style.visibility = (content.style.visibility == "visible" ? "hidden" : "visible");
+            content.style.opacity = (content.style.opacity == "1" ? "0" : "1");
+            menuContainer.style.display = 'none';
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

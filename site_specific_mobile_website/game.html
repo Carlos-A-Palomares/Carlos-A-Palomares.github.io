@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Stone Enclosure: Rock Rings: Game</title>
+    <style>
+        body{
+            background-image: url('images/game_bg.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            stroke: black;
+            color:  rgb(255, 239, 10);
+
+
+        }
+        .fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1050;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fullscreen img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
+        <a class="navbar-brand" href="index.html">Stone Enclosure: Rock Rings </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home</a>
+
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5  d-flex flex-column align-items-center">
+        <h2>Rings of Time: The Stone Quest!</h2><br><br>
+        <img id="imageDisplay" src="images/a1.jpg" class="img-fluid w-50" alt="Display Image">
+        <button id="nextButton" class="btn btn-primary mt-3">Next</button>
+    </div>
+    <div class="fullscreen" id="fullscreenDiv" onclick="toggleFullscreen()">
+        <img src="" id="fullscreenImg">
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        const images = ["images/a1.jpg", "images/a2.jpg", "images/a3.jpg", "images/a4.jpg", "images/a5.jpg"];
+        let currentImageIndex = 0;
+
+        document.getElementById('nextButton').addEventListener('click', function () {
+            if (confirm('Are you sure you want to see the next image?')) {
+                if (currentImageIndex === images.length - 1) {
+                    window.location.href = 'game_over.html';
+                } else {
+                    currentImageIndex = (currentImageIndex + 1) % images.length;
+                    document.getElementById('imageDisplay').src = images[currentImageIndex];
+                }
+            }
+        });
+
+        document.getElementById('imageDisplay').addEventListener('click', function () {
+            const fullscreenDiv = document.getElementById('fullscreenDiv');
+            const fullscreenImg = document.getElementById('fullscreenImg');
+            fullscreenImg.src = this.src;
+            fullscreenDiv.style.display = 'flex';
+        });
+
+        function toggleFullscreen() {
+            const fullscreenDiv = document.getElementById('fullscreenDiv');
+            if (fullscreenDiv.style.display === 'flex') {
+                fullscreenDiv.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
