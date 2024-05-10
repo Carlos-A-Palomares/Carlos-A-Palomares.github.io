@@ -5,7 +5,7 @@
 body {
     background-size: cover;
     background-position: center center;
-    background-image: url(/images/star.jpg);
+    background-image: url(/json_data/images/star.jpg);
     background-color: rgba(0, 0, 0, .5); 
     background-blend-mode: multiply; 
     color: white;
