@@ -44,17 +44,7 @@ section {
 
 .astronaut-craft {
     margin-bottom: 10px;
-}
-.navbar-brand {
-    font-size: 50px;
-    display: inline-block;   
 
-
-}
-.nav-link{
-    font-size: 50px;
-
-}
 .astronaut-details a {
     display: inline-block; 
     font-weight: bold;
@@ -78,7 +68,7 @@ section {
     cursor: pointer;
 }
 
-#spaceCount {
+#astro_count {
     margin-bottom: 100px;
     font-size: 40px;
 }
