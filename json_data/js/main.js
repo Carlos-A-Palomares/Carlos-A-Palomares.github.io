@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
 
-            const countElement = document.getElementById('astro_count');
+            const countElement = document.getElementById('spaceCount');
             if (countElement) {
                 countElement.textContent = `Humans in Space Right Now: ${data.number}`;
             } else {
