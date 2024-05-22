@@ -3,7 +3,7 @@ const pages = [
         title: "Title Slide",
         content: `
             <div class="centered-title">
-                <h1>Mars Insight Portal Project Proposal</h1>
+                <h1>Project Proposal: Mars Insight Portal</h1>
             </div>
         `
     },
