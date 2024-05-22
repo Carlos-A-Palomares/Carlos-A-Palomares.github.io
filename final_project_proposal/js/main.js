@@ -89,7 +89,7 @@ const pages = [
                 </div>
             </div>
         `,
-        images: ['../images/html_sketch.png', '../images/js_sketch.png']  
+        images: ['/images/html_sketch.png', '/images/js_sketch.png']  
     },
     {
         title: "Tech Stack Overview",
