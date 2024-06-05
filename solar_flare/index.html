@@ -6,80 +6,105 @@
     <title>Solar Flare Activity Hub</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/GLTFLoader.js"></script>
 </head>
 <body>
     <header>
-        <div class="logo">Solar Flare Activity Hub</div>
+        <div class="logo">Solar Flare Activity Dashboard</div>
         <nav>
             <ul>
                 <li><a href="#hero">Home</a></li>
-                <li><a href="#dashboard">30-Day Solar Trends</a></li>
-                <li><a href="#latest-flares">Recent Flares</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="#about"> Solar Flare Classification</a></li>
+                <li><a href="#dashboard">30-Day Solar Flare Count</a></li>
+                <li><a href="#latest-flares">Todays Solar Flare Activity</a></li>
                 <li><a href="#gallery">Gallery</a></li>
             </ul>
         </nav>
     </header>
 
-    <section id="hero" class="hero-section">
-        <div class="video-container">
-            <video autoplay muted loop id="header-video">
-                <source src="/solar.mp4" type="video/mp4">
-                <source src="/solar.mp4" type="video/webm">
-                <source src="/solar.mp4" type="video/ogg">
-                Your browser does not support the video tag.
-            </video>
+    <div id="hero" class="hero-section">
+        <div class="img-container">
+            <img id="header-image" src="/logo.jpg" alt="Solar Flare">
             <div class="overlay">
-                <!-- Banner Text -->
-                
             </div>
         </div>
-    </section>
+    </div>
 
-    <section id="about" class="about-section">
-        <h2>About Solar Flares</h2>
+    <div id="about" class="about-section">
+        <h2>Solar Flare Types: A Classification Overview</h2>
         <div class="about-content">
-            <div class="text-content">
-                <p>Solar flares are sudden, intense bursts of radiation emanating from the Sun's atmosphere. These powerful eruptions occur when magnetic energy built up in the Sun's atmosphere is suddenly released. They are often associated with sunspots, which are cooler regions on the Sun's surface with intense magnetic activity. Solar flares can produce a wide range of electromagnetic radiation, from radio waves to X-rays and gamma rays. They can significantly impact space weather, affecting satellite operations, GPS signals, and radio communications on Earth. Solar flares are classified into five categories: A, B, C, M, and X, with X being the most intense. Each class is ten times more powerful than the previous one, with X-class flares capable of causing widespread disruptions. The radiation from solar flares can also pose risks to astronauts and high-altitude flight crews. Despite their potential for disruption, solar flares are a natural part of the Sun's 11-year solar cycle. Scientists study solar flares to better understand their mechanisms and to improve space weather forecasting, which can help mitigate their effects on technology and human activities.     
-                </p>
-                <h3>Solar Flare Classification</h3>
-                <p>Solar flares are classified based on their intensity. The classes are:</p>
-                <ul>
-                    <li><strong>X-Class:</strong> Major flares that can cause worldwide radio blackouts and long-lasting radiation storms.</li>
-                    <li><strong>M-Class:</strong> Medium-sized flares that can cause brief radio blackouts affecting Earth’s polar regions.</li>
-                    <li><strong>C-Class:</strong> Small flares with few noticeable consequences on Earth.</li>
-                    <li><strong>B-Class and A-Class:</strong> Minor flares with minimal impact on Earth.</li>
-                </ul>
+            <div class="left-column">
+                <div class="video-content">
+
+                </div>
             </div>
-            <div class="video-content">
-                <video controls>
-                    <source src="/solarflarevid.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+            <div class="right-column">
+                <table class="classification-table">
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>X-Class</strong></td>
+                            <td>Major flares that can cause worldwide radio blackouts and long-lasting radiation storms.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>M-Class</strong></td>
+                            <td>Medium-sized flares that can cause brief radio blackouts affecting Earth’s polar regions.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>C-Class</strong></td>
+                            <td>Small flares with few noticeable consequences on Earth.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>B-Class and A-Class</strong></td>
+                            <td>Minor flares with minimal impact on Earth.</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section id="dashboard" class="dashboard-section">
-        <h2>Solar Flare Activity (Last 30 Days)</h2>
-        <div id="graph-container"></div>
-    </section>
+    <div id="dashboard" class="dashboard-section">
+        <h2>Daily Solar Flare Counts: Last 30 Days</h2>
+        <div class="dashboard-content">
+            <div id="graph-container" class="graph-container"></div>
+            <div id="hover-data" class="hover-data">
+                <div id="hover-info">
+                    <p><strong>Date:</strong> <span id="hover-date"></span></p>
+                    <p><strong>Number of Flares:</strong> <span id="hover-count"></span></p>
+                </div>
+                <table id="hover-table">
+                    <thead>
+                        <tr>
+                            <th>Class Type</th>
+                            <th>Peak Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-    <section id="latest-flares" class="latest-flares-section">
-        <h2>Latest Solar Flares</h2>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="latest-flares" class="latest-flares-section">
+        <h2>Today's Solar Flare Activity</h2>
         <div id="latest-flares-grid"></div>
-    </section>
+    </div>
 
-    <section id="gallery" class="gallery-section">
+    <div id="gallery" class="gallery-section">
         <h2>Gallery</h2>
         <div class="gallery-container">
             <button id="prev-button" onclick="prevImages()">&#10094;</button>
             <div id="gallery-images" class="gallery-images"></div>
             <button id="next-button" onclick="nextImages()">&#10095;</button>
         </div>
-    </section>
+    </div>
     
     <footer>
         <p>&copy; 2024 Solar Flare Activity Hub</p>

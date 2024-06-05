@@ -1,7 +1,6 @@
 const apiKey = 'UxjEnfpboVpIKkgbyBqIiWQnXUFpnxK1aPsG75QL';
 
 let currentIndex = 0;
-const imagesPerPage = 4;
 let images = [];
 
 const formatDate = (date) => {
@@ -9,14 +8,8 @@ const formatDate = (date) => {
     return new Intl.DateTimeFormat('en-US', options).format(date);
 };
 
-
-const endDate = new Date();
-const startDate = new Date();
-startDate.setDate(endDate.getDate() - 30);
-
-
-const fetchSolarFlareData = async () => {
-    const apiUrl = `https://api.nasa.gov/DONKI/FLR?startDate=${startDate.toISOString().split('T')[0]}&endDate=${endDate.toISOString().split('T')[0]}&api_key=${apiKey}`;
+const fetchSolarFlareData = async (startDate, endDate) => {
+    const apiUrl = `https://api.nasa.gov/DONKI/FLR?startDate=${startDate}&endDate=${endDate}&api_key=${apiKey}`;
 
     try {
         const response = await fetch(apiUrl);
@@ -28,7 +21,11 @@ const fetchSolarFlareData = async () => {
 };
 
 const plotSolarFlareData = async () => {
-    const data = await fetchSolarFlareData();
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - 30);
+    const endDate = new Date();
+
+    const data = await fetchSolarFlareData(startDate.toISOString().split('T')[0], endDate.toISOString().split('T')[0]);
     if (!data || data.length === 0) {
         document.getElementById('graph-container').innerHTML = '<p>No solar flare data available for the selected period.</p>';
         return;
@@ -46,70 +43,102 @@ const plotSolarFlareData = async () => {
         const date = formatDate(new Date(event.peakTime));
         if (dateCounts[date] !== undefined) {
             dateCounts[date]++;
-            dateDetails[date].push(`Class: ${event.classType}, Location: ${event.sourceLocation}, Peak Time: ${event.peakTime}`);
+            dateDetails[date].push({ classType: event.classType, peakTime: new Date(event.peakTime).toLocaleTimeString() });
         }
     });
 
     const dates = Object.keys(dateCounts);
     const counts = dates.map(date => dateCounts[date]);
-    const details = dates.map(date => dateDetails[date].join('<br>'));
+    const details = dates.map(date => dateDetails[date]);
 
     const trace = {
         x: dates,
         y: counts,
         mode: 'lines+markers',
         type: 'scatter',
-        text: details,
-        hoverinfo: 'text',
-        marker: { size: 6 },
-        line: { shape: 'linear' }
+        text: details.map(detail => detail.map(d => `Class: ${d.classType}, Peak Time: ${d.peakTime}`).join('<br>')),
+        hoverinfo: 'x+y',
+        marker: { size: 6, color: 'red' },
+        line: { shape: 'linear', color: 'red' }
     };
 
     const plotData = [trace];
 
     const layout = {
         title: '',
+        paper_bgcolor: 'black',
+        plot_bgcolor: 'black',
         xaxis: {
             title: 'Date',
             tickmode: 'array',
             tickvals: dates,
             ticktext: dates,
             tickangle: -45,
-            automargin: true
+            automargin: true,
+            color: 'white',
+            gridcolor: 'white'
         },
         yaxis: {
-            title: 'Number of Solar Flares'
+            title: 'Number of Solar Flares',
+            color: 'white',
+            gridcolor: 'white'
+        },
+        font: {
+            color: 'white'
         }
     };
 
     Plotly.newPlot('graph-container', plotData, layout);
+
+    document.getElementById('graph-container').on('plotly_hover', function(data) {
+        const point = data.points[0];
+        const date = point.x;
+        const count = point.y;
+        const details = point.text.split('<br>');
+
+        document.getElementById('hover-date').textContent = date;
+        document.getElementById('hover-count').textContent = count;
+        
+        const tbody = document.getElementById('hover-table').querySelector('tbody');
+        tbody.innerHTML = '';
+        details.forEach(detail => {
+            const [classType, peakTime] = detail.split(', Peak Time: ');
+            const tr = document.createElement('tr');
+            const classTd = document.createElement('td');
+            const peakTimeTd = document.createElement('td');
+            classTd.innerHTML = classType;
+            peakTimeTd.innerHTML = peakTime;
+            tr.appendChild(classTd);
+            tr.appendChild(peakTimeTd);
+            tbody.appendChild(tr);
+        });
+    });
 };
 
-
 const displayLatestFlares = async () => {
-    const data = await fetchSolarFlareData();
+    const today = new Date();
+    const startDate = today.toISOString().split('T')[0];
+    const endDate = today.toISOString().split('T')[0];
+
+    const data = await fetchSolarFlareData(startDate, endDate);
     const latestFlaresGrid = document.getElementById('latest-flares-grid');
     if (!data || data.length === 0) {
-        latestFlaresGrid.innerHTML = '<p>No recent solar flares available.</p>';
+        latestFlaresGrid.innerHTML = '<p>No solar flares available for today.</p>';
         return;
     }
 
-
-    data.sort((a, b) => new Date(b.peakTime) - new Date(a.peakTime));
-
-
-    data.slice(0, 10).forEach(event => {
+    data.forEach(event => {
         const flareItem = document.createElement('div');
         flareItem.className = 'flare-item';
         flareItem.innerHTML = `
             <h3>${formatDate(new Date(event.peakTime))}</h3>
             <p>Class: ${event.classType}</p>
-            <p>Location: ${event.sourceLocation}</p>
             <p>Peak Time: ${new Date(event.peakTime).toLocaleTimeString()}</p>
         `;
         latestFlaresGrid.appendChild(flareItem);
     });
 };
+
 const fetchSolarFlareImages = async () => {
     const apiUrl = `https://images-api.nasa.gov/search?q=solar%20flare&media_type=image`;
     try {
@@ -126,26 +155,17 @@ const displayImages = () => {
     const galleryImages = document.getElementById('gallery-images');
     galleryImages.innerHTML = '';
 
-    const start = currentIndex * imagesPerPage;
-    const end = start + imagesPerPage;
-    const currentImages = images.slice(start, end);
-
-    currentImages.forEach(image => {
-        const imgUrl = image.links[0].href;
+    if (images.length > 0) {
+        const imgUrl = images[currentIndex].links[0].href;
         const imgElement = document.createElement('img');
         imgElement.src = imgUrl;
         imgElement.alt = 'Solar Flare';
-        imgElement.onclick = () => toggleEnlarge(imgElement);
         galleryImages.appendChild(imgElement);
-    });
-};
-
-const toggleEnlarge = (imgElement) => {
-    imgElement.classList.toggle('enlarged');
+    }
 };
 
 const nextImages = () => {
-    if ((currentIndex + 1) * imagesPerPage < images.length) {
+    if ((currentIndex + 1) < images.length) {
         currentIndex++;
         displayImages();
     }
@@ -158,8 +178,25 @@ const prevImages = () => {
     }
 };
 
-document.addEventListener('DOMContentLoaded', fetchSolarFlareImages);
+const fetchVideo = async () => {
+    const videoUrl = 'https://svs.gsfc.nasa.gov/vis/a010000/a010100/a010109/10109_Solar_Flares_H264_960x720_29.97_Apple_TV.m4v';
 
+    try {
+        const videoElement = document.createElement('video');
+        videoElement.controls = true;
+        videoElement.innerHTML = `<source src="${videoUrl}" type="video/mp4">Your browser does not support the video tag.`;
+        
+        document.querySelector('.video-content').appendChild(videoElement);
+        document.getElementById('message').textContent = 'Video loaded successfully.';
+    } catch (error) {
+        console.error('Error fetching video:', error);
+        document.getElementById('message').textContent = 'Error fetching video.';
+    }
+};
 
-plotSolarFlareData();
-displayLatestFlares();
+document.addEventListener('DOMContentLoaded', () => {
+    fetchSolarFlareImages();
+    plotSolarFlareData();
+    displayLatestFlares();
+    fetchVideo();
+});
